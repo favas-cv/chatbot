@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from 'react'
 
 function Jokefetch() {
-    const [joke,setjoke] = useState({});
-    function getjoke(){
-              fetch('https://official-joke-api.appspot.com/random_joke')
-        .then(res=>res.json())
-        .then(datas=>setjoke(datas));
+    const [joke, setjoke] = useState({});
+    const [load, setload] = useState(false);
+    function getjoke() {
+        setload(true)
+        fetch('https://official-joke-api.appspot.com/random_joke')
+            .then(res => res.json())
+            .then(datas => {
+                setjoke(datas)
+                setload(false);
+            });
     }
-    useEffect(()=>{
+    useEffect(() => {
         getjoke();
-  
-    },[]);
 
-    function fresh(){
+    }, []);
+
+    function fresh() {
         getjoke();
     }
-  return (
-<>
-<ul>
-<li>{joke.setup}</li>
-<li>{joke.punchline}</li>
+    return (
+        <>
+            {load ? (<p>loading</p>) : (<ul>
+                <li>{joke.setup}</li>
+                <li>{joke.punchline}</li>
 
-</ul>
-<button onClick={fresh}>refresh</button>
+            </ul>)}
+            <button onClick={fresh}>{load ? 'loading' : 'refresh'}</button>
 
-</>  )
+        </>)
 }
 
 export default Jokefetch

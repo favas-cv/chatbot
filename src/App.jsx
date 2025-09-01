@@ -18,6 +18,9 @@ import Fetch from './components/conditional-rendering/sideeffects/fetchingAPI'
 import Formkidilam from './components/q5'
 import UseEffect from './components/q6'
 import Jokefetch from './components/q7'
+import Resize from './components/q8'
+import Keyboard from './components/q9'
+import Formeffect from './components/q10'
 
 function App() {
       const [frut,setfrut] =useState(['apple','banana','mango']);
@@ -30,6 +33,9 @@ function App() {
 
   return (
     <>
+    <Formeffect/>
+    <Keyboard/>
+    <Resize/>
     <Jokefetch/>
     <UseEffect/>
     <Formkidilam/>

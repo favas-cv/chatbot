@@ -1,17 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 function UseEffect() {
-    const [count,setcount] = useState(0);
-    const [running,setrunning] = useState(true);
+    const [count,setcount] = useState(10);
+    const [running,setrunning] = useState(false);
     const ref = useRef(null);
     useEffect(()=>{
         if(running){
      ref.current = setInterval(() => {
-            setcount(c => c +1)
+            setcount(c => c - 1)
             
         }, 1000);}
+
         return ()=> clearInterval(ref.current)
     },[running]);
+
+    useEffect(()=>{
+        if(count===0){
+            setrunning(false);
+            clearInterval(ref.current)
+        }
+    },[count])
 
     useEffect(()=>{
         document.title=count;
@@ -25,9 +33,9 @@ function UseEffect() {
 count is {count}
 <button onClick={stoping}>{running?'stop':'start'}</button>
 <button onClick={()=>{
-    setcount(0)
+    setcount(10)
     clearInterval(ref.current)
-    setrunning(false)
+    setrunning(true)
 }
 }>reset</button>
 
