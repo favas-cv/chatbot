@@ -1,51 +1,38 @@
 import React, { useState } from 'react'
 
 function Todo() {
-    const[todos,settodos] = useState([]);
+    const [todos,settodos] = useState([]);
     const [input,setinput] = useState('');
-
-    function addtodo(){
+    function addlist(){
         if(input.trim()==='') return;
-    
-            
         settodos([...todos,input]);
-        setinput('');
-        
+        setinput('')
 
-    };
+    }
 
-    function deletetodo(dele){
-       settodos(todos.filter((todo)=>todo!==dele))
-    };
+    function deletetodo(index){
+        settodos(todos.filter((res,i)=>i!==index))
 
- 
-
-
-
+    }
+    
   return (
     <>
     <h1>my todo</h1>
     <input type='text' value={input} onChange={(e)=>setinput(e.target.value)}/>
-    <button onClick={addtodo}>add</button>
+   <button onClick={addlist}>add</button>
+   <ul>  
+     {todos.map((res,i)=>(
+    <li key={i}>{res}
+    <button onClick={()=>deletetodo(i)}>delete</button>
+    </li>
     
-    <ul>
-        {
-            todos.map((todo,i)=>(
     
-                <li key={i}>{todo}
-                <button onClick={()=>deletetodo(todo)}>X</button>
-                
-                </li>
-               
-            ))
-            
-        } 
-    </ul>
+   ))}
+   
+   
+   </ul>
 
-    
     </>
-
-
   )
 }
 
